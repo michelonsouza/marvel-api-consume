@@ -7,12 +7,16 @@ import { paginationRequest } from '~/store/modules/characters/actions';
 
 import { Container } from './styles';
 
-function Paginate({ pagination }) {
+function Paginate({ pagination, onPageChange }) {
   const dispatch = useDispatch();
 
   function handlePagination(page) {
-    if (page.selected + 1 !== pagination.currentPage) {
+    if (page.selected + 1 !== pagination.currentPage && !onPageChange) {
       dispatch(paginationRequest(page.selected + 1));
+    }
+
+    if (page.selected + 1 !== pagination.currentPage && onPageChange) {
+      onPageChange(page.selected + 1);
     }
   }
 
@@ -39,7 +43,12 @@ function Paginate({ pagination }) {
   );
 }
 
+Paginate.defaultProps = {
+  onPageChange: null,
+};
+
 Paginate.propTypes = {
+  onPageChange: PropTypes.func,
   pagination: PropTypes.shape({
     offset: PropTypes.number,
     limit: PropTypes.number,

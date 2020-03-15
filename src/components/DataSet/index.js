@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import Paginate from '../Paginate';
@@ -6,9 +6,18 @@ import { Container, DataHead, Scrollbar } from './styles';
 import DataItem from './DataItem';
 
 function DataSet({ labels, data, pagination }) {
+  const scrollRef = useRef(null);
+
+  useEffect(() => {
+    if (scrollRef) {
+      scrollRef.current._container.scrollTop = 0;
+      scrollRef.current._container.scrollLeft = 0;
+    }
+  }, [data]);
+
   return (
     <Container>
-      <Scrollbar className="scrollbar-container">
+      <Scrollbar className="scrollbar-container" ref={scrollRef}>
         <DataHead>
           {labels.map((label, index) => (
             <span data-index={index} key={`data-head-text-${String(index)}`}>

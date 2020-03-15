@@ -1,5 +1,5 @@
 /* eslint-disable react/no-danger */
-import React, { useMemo, useEffect, useState } from 'react';
+import React, { useMemo, useEffect, useState, useRef, memo } from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
@@ -19,10 +19,11 @@ import {
   NoComics,
 } from './styles';
 
-export default function SingleCharacter({ match }) {
+function SingleCharacter({ match }) {
   const [comics, setComics] = useState([]);
   const [pagination, setPagination] = useState(null);
   const [loading, setLoading] = useState(true);
+  const scrollRef = useRef(null);
 
   const character = useSelector(state =>
     state.characters.characters.find(c => c.id === Number(match.params.id))
@@ -32,49 +33,55 @@ export default function SingleCharacter({ match }) {
     return `${character.thumbnail.path}.${character.thumbnail.extension}`;
   }, [character.thumbnail.extension, character.thumbnail.path]);
 
-  useEffect(() => {
-    async function loadComics() {
-      try {
-        const { data: response } = await api.get(
-          `/characters/${match.params.id}/comics`,
-          {
-            params: {
-              ...api.defaults.params,
-              limit: 100,
-            },
-          }
-        );
+  async function loadComics(page = 1) {
+    setLoading(true);
+    try {
+      const { data: response } = await api.get(
+        `/characters/${match.params.id}/comics`,
+        {
+          params: {
+            ...api.defaults.params,
+            limit: 100,
+            offset: (page - 1) * 100,
+          },
+        }
+      );
 
-        const {
-          offset,
-          limit,
-          total,
-          count,
-          results: getComics,
-        } = response.data;
-        const newPagination = {
-          offset,
-          limit,
-          total,
-          count,
-          currentPage: 1,
-          lastPage: Math.ceil(total / limit),
-        };
+      const { offset, limit, total, count, results: getComics } = response.data;
+      const newPagination = {
+        offset,
+        limit,
+        total,
+        count,
+        currentPage: 1,
+        lastPage: Math.ceil(total / limit),
+      };
 
-        setComics(getComics);
-        setPagination(newPagination);
-      } catch (error) {
-        toast.error('Erro ao buscar facículos');
+      setComics(getComics);
+      setPagination(newPagination);
+
+      if (scrollRef) {
+        scrollRef.current._container.scrollTop = 0;
+        scrollRef.current._container.scrollLeft = 0;
       }
-
-      setLoading(false);
+    } catch (error) {
+      toast.error('Erro ao buscar facículos');
     }
 
+    setLoading(false);
+  }
+
+  useEffect(() => {
     loadComics();
-  }, [match.params.id]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function image(comic) {
     return `${comic.images[0].path}.${comic.images[0].extension}`;
+  }
+
+  function handlePageChange(page) {
+    loadComics(page);
   }
 
   return (
@@ -97,7 +104,7 @@ export default function SingleCharacter({ match }) {
         <Title>Facículos</Title>
 
         {comics.length && (
-          <Scrollbar>
+          <Scrollbar ref={scrollRef}>
             {comics.map(comic => (
               <ComicContainer key={String(comic.id)}>
                 {comic.images.length ? (
@@ -137,7 +144,7 @@ export default function SingleCharacter({ match }) {
           </NoComics>
         )}
         {pagination && pagination.total > pagination.limit && (
-          <Paginate pagination={pagination} />
+          <Paginate pagination={pagination} onPageChange={handlePageChange} />
         )}
       </>
     </AppLayout>
@@ -151,3 +158,5 @@ SingleCharacter.propTypes = {
     }),
   }).isRequired,
 };
+
+export default memo(SingleCharacter);
