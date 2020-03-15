@@ -104,7 +104,12 @@ function SingleCharacter({ match }) {
         <Title>Facículos</Title>
 
         {comics.length && (
-          <Scrollbar ref={scrollRef}>
+          <Scrollbar
+            ref={scrollRef}
+            data-paginate={String(
+              pagination && pagination.total > pagination.limit
+            )}
+          >
             {comics.map(comic => (
               <ComicContainer key={String(comic.id)}>
                 {comic.images.length ? (

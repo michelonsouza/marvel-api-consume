@@ -7,6 +7,7 @@ const initialState = {
   selectedCharacter: null,
   pagination: null,
   loading: false,
+  theme: 'light',
 };
 
 export default function auth(state = initialState, action = {}) {
@@ -46,6 +47,10 @@ export default function auth(state = initialState, action = {}) {
         draft.selectedCharacter = null;
         draft.pagination = null;
         draft.loading = false;
+        break;
+      }
+      case types.THEME_CHANGE: {
+        draft.theme = action.payload.theme;
         break;
       }
       default:

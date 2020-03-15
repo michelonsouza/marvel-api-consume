@@ -99,6 +99,8 @@ export const InfoContainer = styled.div`
       font-size: 20px;
     }
   }
+
+  color: ${props => extractColor(props, 'textColor')};
 `;
 
 export const Scrollbar = styled(PerfectScrollbar)`
@@ -109,6 +111,9 @@ export const Scrollbar = styled(PerfectScrollbar)`
 
   @media screen and (max-width: 565px) {
     margin: 0 ${metrics.spacing.baseMargin}px;
+    max-height: calc(
+      100vh - ${props => (props['data-paginate'] === 'true' ? 400 : 350)}px
+    );
     padding-left: 0;
   }
 `;
@@ -133,6 +138,7 @@ export const ComicContainer = styled.div`
     width: 120px;
     height: 185px;
     margin-right: ${metrics.spacing.basePadding}px;
+    color: ${props => extractColor(props, 'textColor')};
 
     @media screen and (max-width: 565px) {
       margin-bottom: ${metrics.spacing.baseMargin}px;

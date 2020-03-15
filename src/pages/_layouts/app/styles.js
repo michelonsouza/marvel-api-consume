@@ -5,7 +5,11 @@ import metrics from '~/styles/metrics';
 import backgroundPattern from '~/assets/images/background-pattern.jpg';
 
 export const Container = styled.div`
-  background: ${props => extractColor(props, 'primary')};
+  background: ${props =>
+    extractColor(
+      props,
+      props.theme.title === 'light' ? 'primary' : 'secondaryBackground'
+    )};
   display: flex;
   flex: 1;
   flex-direction: column;

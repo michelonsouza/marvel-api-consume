@@ -39,3 +39,10 @@ export function paginationSuccess(characters, pagination) {
     payload: { characters, pagination },
   };
 }
+
+export function themeChange(theme) {
+  return {
+    type: types.THEME_CHANGE,
+    payload: { theme },
+  };
+}

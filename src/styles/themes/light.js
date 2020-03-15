@@ -10,7 +10,7 @@ export default {
     white: '#fff',
 
     background: '#fff',
-    secondaryBackground: '#eee',
+    secondaryBackground: '#ddd',
     textColor: '#444',
     secondaryTextColor: '#999',
     borderColor: '#ddd',

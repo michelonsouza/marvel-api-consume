@@ -5,10 +5,11 @@ import { ThemeContext } from 'styled-components';
 import { useDispatch } from 'react-redux';
 
 import { logout } from '~/store/modules/auth/actions';
+import { themeChange } from '~/store/modules/characters/actions';
 
 import logo from '~/assets/images/logo.svg';
 
-import { Container } from './styles';
+import { Container, SwitchButton } from './styles';
 
 export default function Header() {
   const theme = useContext(ThemeContext);
@@ -18,6 +19,10 @@ export default function Header() {
     dispatch(logout());
   }
 
+  function handleToggleTheme() {
+    dispatch(themeChange(theme.title === 'light' ? 'dark' : 'light'));
+  }
+
   return (
     <Container>
       <Link to="/characters" title="Lista de Personagens">
@@ -25,6 +30,16 @@ export default function Header() {
       </Link>
 
       <nav>
+        <SwitchButton
+          type="button"
+          className="switch-container"
+          value={theme.title}
+          onClick={handleToggleTheme}
+        >
+          <span className="switch-circle">
+            {theme.title === 'light' ? 'off' : 'on'}
+          </span>
+        </SwitchButton>
         <ul>
           <li title="Sair da aplicação">
             <button type="button" onClick={handleLogout}>

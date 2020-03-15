@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect, Route } from 'react-router-dom';
 import { AnimatedSwitch } from 'react-router-transition';
+import PropTypes from 'prop-types';
 
 import { Login, Characters, SingleCharacter } from '~/pages';
 
-export default function Routes() {
+export default function Routes({ onThemeChange }) {
   const { signed } = useSelector(state => state.auth);
+  const { theme } = useSelector(state => state.characters);
+
+  useEffect(() => {
+    onThemeChange(theme);
+  }, [onThemeChange, theme]);
 
   return (
     <AnimatedSwitch
@@ -35,3 +41,7 @@ export default function Routes() {
     </AnimatedSwitch>
   );
 }
+
+Routes.propTypes = {
+  onThemeChange: PropTypes.func.isRequired,
+};

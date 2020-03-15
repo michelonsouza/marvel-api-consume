@@ -9,6 +9,7 @@ export default createGlobalStyle`
     outline: 0;
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased !important;
+    transition: color 200ms, background 200ms, border-color 200ms ease;
   }
 
   *:focus {
