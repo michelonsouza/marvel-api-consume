@@ -48,8 +48,18 @@ export default function Login() {
         <img src={logo} alt="Marvel Logo" title="Marvel logo" />
         <h1>Dados de acesso</h1>
         <Form ref={formRef} onSubmit={handleSubmit}>
-          <Input name="public_key" placeholder="public_key" required />
-          <Input name="private_key" placeholder="private_key" required />
+          <Input
+            name="public_key"
+            placeholder="public_key"
+            required
+            data-login="true"
+          />
+          <Input
+            name="private_key"
+            placeholder="private_key"
+            required
+            data-login="true"
+          />
           <Button mt type="submit" loading={loading}>
             Acessar
           </Button>

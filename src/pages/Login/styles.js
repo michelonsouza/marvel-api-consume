@@ -17,7 +17,7 @@ export const Content = styled.div`
   max-width: 94%;
   padding: ${metrics.spacing.basePadding}px;
   border-radius: ${metrics.baseRadius}px;
-  background: ${props => extractColor(props, 'background')};
+  background: ${props => extractColor(props, 'white')};
   display: flex;
   justify-content: center;
   flex-direction: column;

@@ -15,7 +15,7 @@ function Paginate({ pagination, onPageChange }) {
       dispatch(paginationRequest(page.selected + 1));
     }
 
-    if (page.selected + 1 !== pagination.currentPage && onPageChange) {
+    if (onPageChange) {
       onPageChange(page.selected + 1);
     }
   }

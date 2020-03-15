@@ -55,3 +55,8 @@ After entering your credentials, you will be presented with a screen like the im
 Click on a line to select the desired character. A screen will appear, like the one below, containing information about the editions the character participated in. If there are no editions, a message will be displayed as "Sem fáciculos para mostrar".
 
 ![single-character-screen](/.github/single-character-screen.png)
+
+#### Dark mode
+The application has a dark-mode. There is a switch button at the top of the application. Select the color mode you want just by clicking on this button.
+
+![light-mode](/.github/light-mode.png) ![dark-mode](/.github/dark-mode.png)

@@ -31,13 +31,22 @@ export const InputText = styled.input`
   height: ${metrics.baseElementHeight}px;
   padding: 0 ${metrics.spacing.basePadding / 2}px;
   border: 1px solid ${props => extractColor(props, 'primary')};
-  color: ${props => extractColor(props, 'textColor')};
+  color: ${props =>
+    extractColor(props, props['data-login'] === 'true' ? '#444' : 'textColor')};
   caret-color: ${props => extractColor(props, 'primary')};
-  background: ${props => extractColor(props, 'background')};
+  background: ${props =>
+    extractColor(
+      props,
+      props['data-login'] === 'true' ? 'white' : 'background'
+    )};
   border-radius: ${metrics.baseRadius}px;
   width: 100%;
 
   &::placeholder {
-    color: ${props => extractColor(props, 'secondaryTextColor')};
+    color: ${props =>
+      extractColor(
+        props,
+        props['data-login'] === 'true' ? '#999' : 'secondaryTextColor'
+      )};
   }
 `;

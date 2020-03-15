@@ -23,6 +23,7 @@ function SingleCharacter({ match }) {
   const [comics, setComics] = useState([]);
   const [pagination, setPagination] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [offset, setOffset] = useState(0);
   const scrollRef = useRef(null);
 
   const character = useSelector(state =>
@@ -34,6 +35,8 @@ function SingleCharacter({ match }) {
   }, [character.thumbnail.extension, character.thumbnail.path]);
 
   async function loadComics(page = 1) {
+    const newOffset = (page - 1) * 100 !== offset ? (page - 1) * 100 : offset;
+    setOffset(newOffset);
     setLoading(true);
     try {
       const { data: response } = await api.get(
@@ -47,7 +50,7 @@ function SingleCharacter({ match }) {
         }
       );
 
-      const { offset, limit, total, count, results: getComics } = response.data;
+      const { limit, total, count, results: getComics } = response.data;
       const newPagination = {
         offset,
         limit,
