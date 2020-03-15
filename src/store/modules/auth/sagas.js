@@ -43,7 +43,7 @@ export function* auth({ payload }) {
     );
 
     toast.success('Autenticação bem sucedida');
-    history.push('/dashboard');
+    history.push('/characters');
   } catch (error) {
     yield put(authorizationFailure());
     toast.error('Public key e/ou Private Key são inválidas');
