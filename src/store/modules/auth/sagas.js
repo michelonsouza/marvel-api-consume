@@ -51,19 +51,21 @@ export function* auth({ payload }) {
 }
 
 function setDefaultParams({ payload }) {
-  const { auth: authReducer } = payload;
+  if (payload) {
+    const { auth: authReducer } = payload;
 
-  if (authReducer) {
-    const { private_key, public_key } = authReducer;
-    const timestamp = new Date().getTime();
-    const stringForHash = timestamp + private_key + public_key;
-    const hash = md5(stringForHash);
+    if (authReducer) {
+      const { private_key, public_key } = authReducer;
+      const timestamp = new Date().getTime();
+      const stringForHash = timestamp + private_key + public_key;
+      const hash = md5(stringForHash);
 
-    api.defaults.params = {
-      ts: timestamp,
-      apikey: public_key,
-      hash,
-    };
+      api.defaults.params = {
+        ts: timestamp,
+        apikey: public_key,
+        hash,
+      };
+    }
   }
 }
 
