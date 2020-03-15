@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "app:init": "npm install && npm run dev",
     "build": "webpack --mode production",
     "dev": "webpack-dev-server --mode development",
     "predeploy": "npm run build",
