@@ -131,6 +131,7 @@ export const ComicContainer = styled.div`
   img,
   .cover-container {
     width: 120px;
+    height: 185px;
     margin-right: ${metrics.spacing.basePadding}px;
 
     @media screen and (max-width: 565px) {
