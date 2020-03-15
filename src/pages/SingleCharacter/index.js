@@ -121,7 +121,7 @@ export default function SingleCharacter({ match }) {
                   <div className="comic-description">
                     <p
                       dangerouslySetInnerHTML={{
-                        __html: comic.description || 'N/A',
+                        __html: comic.description || 'SEM DESCRIÇÃO',
                       }}
                     />
                   </div>

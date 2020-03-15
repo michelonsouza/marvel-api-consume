@@ -1,0 +1,20 @@
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+}
+
+.loading-container {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  width: 100;
+  background: #f0131e;
+}
+
+.loading-container > img.marvel-logo {
+  width: 300px;
+}

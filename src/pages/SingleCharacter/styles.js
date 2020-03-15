@@ -102,7 +102,7 @@ export const InfoContainer = styled.div`
 `;
 
 export const Scrollbar = styled(PerfectScrollbar)`
-  max-height: calc(100vh - 450px);
+  max-height: calc(100vh - 500px);
   padding: 0 ${metrics.spacing.basePadding}px;
   padding-bottom: ${metrics.spacing.basePadding}px;
   position: relative;

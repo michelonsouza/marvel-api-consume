@@ -5,10 +5,13 @@
 
 ---
 ### Marvel API comsume application
-The purpose of this application is to demonstrate in a simple way the consumption of Marvel API having characters and comics that they participated.
+The purpose of this application is to demonstrate in a simple way the consumption of [Marvel API](https://developer.marvel.com/) having characters and comics that they participated.
 
 #### Online aplication
 An example of the working application can be tried out by clicking on [Marvel Application](https://hungry-darwin-1f8115.netlify.com/).
+
+#### Debuging application
+To debug this application, **Reactotron** is used. Click [here](https://github.com/infinitered/reactotron) to see its installation and use.
 
 #### Init Aplication
 To start the application, in UNIX environments (MacOS and Linux), just run the command:
