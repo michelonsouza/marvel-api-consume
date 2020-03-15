@@ -137,6 +137,7 @@ export const ComicContainer = styled.div`
     @media screen and (max-width: 565px) {
       margin-bottom: ${metrics.spacing.baseMargin}px;
       width: 200px;
+      height: 309px;
     }
   }
 
