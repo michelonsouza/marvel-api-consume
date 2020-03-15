@@ -1,10 +1,12 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { resolve } = require('path');
 
 module.exports = {
   mode: 'development',
   entry: ['@babel/polyfill', resolve(__dirname, 'src', 'index.js')],
+  context: resolve(__dirname, 'src'),
   output: {
     path: resolve(__dirname, 'dist'),
     filename: '[name].js',
@@ -25,6 +27,7 @@ module.exports = {
       hashDigest: 'hex',
       hashDigestLength: 20,
     }),
+    new CopyWebpackPlugin([{ from: 'assets/static' }]),
   ],
   devServer: {
     contentBase: resolve(__dirname, 'public'),
